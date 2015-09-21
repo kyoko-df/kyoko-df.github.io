@@ -37,15 +37,17 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description">
-<meta property="og:type" content="website">
+<meta name="description" content="React学习-Virtual Dom总结：为了防止太长不看，简单总结一下Virtual Dom到底做了什么。DOM操作很慢是两个原因，一个是本身操作就不快，第二是我们（还有很多框架）处理dom的方式很慢，Virtual Dom解决了我们这些愚蠢的程序员对Dom的低劣操作，它让我们不需要进行Dom操作，而是将希望展现的最终结果告诉React，React通过一个简化的Dom即Virtual dom进">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2015/09/21/react_virtualdom/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
+<meta property="og:description" content="React学习-Virtual Dom总结：为了防止太长不看，简单总结一下Virtual Dom到底做了什么。DOM操作很慢是两个原因，一个是本身操作就不快，第二是我们（还有很多框架）处理dom的方式很慢，Virtual Dom解决了我们这些愚蠢的程序员对Dom的低劣操作，它让我们不需要进行Dom操作，而是将希望展现的最终结果告诉React，React通过一个简化的Dom即Virtual dom进">
+<meta property="og:image" content="http://yoursite.com/../gitbook/images/julia-benchmark.png">
+<meta property="og:updated_time" content="2015-08-04T16:10:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
-<meta name="twitter:description">
+<meta name="twitter:description" content="React学习-Virtual Dom总结：为了防止太长不看，简单总结一下Virtual Dom到底做了什么。DOM操作很慢是两个原因，一个是本身操作就不快，第二是我们（还有很多框架）处理dom的方式很慢，Virtual Dom解决了我们这些愚蠢的程序员对Dom的低劣操作，它让我们不需要进行Dom操作，而是将希望展现的最终结果告诉React，React通过一个简化的Dom即Virtual dom进">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -55,7 +57,7 @@
   };
 </script>
 
-  <title> Hexo </title>
+  <title>  | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -73,9 +75,7 @@
 
 
 
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -143,9 +143,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div id="content" class="content"> 
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -156,9 +156,7 @@
           
           
             
-              <a class="post-title-link" href="/2015/09/21/react_virtualdom/" itemprop="url">
-                未命名
-              </a>
+              
             
           
         </h1>
@@ -186,8 +184,7 @@
       
 
       
-        
-          <span itemprop="articleBody"><h1 id="React学习-Virtual_Dom">React学习-Virtual Dom</h1><p><strong>总结：为了防止太长不看，简单总结一下Virtual Dom到底做了什么。DOM操作很慢是两个原因，一个是本身操作就不快，第二是我们（还有很多框架）处理dom的方式很慢，Virtual Dom解决了我们这些愚蠢的程序员对Dom的低劣操作，它让我们不需要进行Dom操作，而是将希望展现的最终结果告诉React，React通过一个简化的Dom即Virtual dom进行render，当你试图改变显示内容时，新生成的Virtual Dom会与现在的Virtual dom对比，通过diff算法找到区别，这些操作都是在快速的js中完成的，最后对实际Dom进行最小的Dom操作来完成效果，这就是Virtual Dom的概念。</strong></p>
+        <span itemprop="articleBody"><h1 id="React学习-Virtual_Dom">React学习-Virtual Dom</h1><p><strong>总结：为了防止太长不看，简单总结一下Virtual Dom到底做了什么。DOM操作很慢是两个原因，一个是本身操作就不快，第二是我们（还有很多框架）处理dom的方式很慢，Virtual Dom解决了我们这些愚蠢的程序员对Dom的低劣操作，它让我们不需要进行Dom操作，而是将希望展现的最终结果告诉React，React通过一个简化的Dom即Virtual dom进行render，当你试图改变显示内容时，新生成的Virtual Dom会与现在的Virtual dom对比，通过diff算法找到区别，这些操作都是在快速的js中完成的，最后对实际Dom进行最小的Dom操作来完成效果，这就是Virtual Dom的概念。</strong></p>
 <h3 id="Virtual_Dom快的前提">Virtual Dom快的前提</h3><p>1.1 Javascript很快</p>
 <p>Julia有一个Benchmark，<a href="http://julialang.org/benchmarks/" target="_blank" rel="external">Julia Benchmarks</a>， 可以看到Javascript跟C语言很接近了，也就几倍的差距，跟Java基本也是一个量级。</p>
 <p><img src="../gitbook/images/julia-benchmark.png" alt="julia-benchmark"></p>
@@ -242,7 +239,6 @@
 <p>具体的diff算法<a href="http://blog.jobbole.com/73701/" target="_blank" rel="external">React的diff算法</a>，防白板：<a href="http://blog.jobbole.com/73701/" target="_blank" rel="external">http://blog.jobbole.com/73701/</a></p>
 <p><strong>以上内容整理自知乎用户<a href="http://www.zhihu.com/people/emayej-bee" target="_blank" rel="external">EMayej Bee</a>和<a href="http://www.zhihu.com/people/zhou-cong-49" target="_blank" rel="external">周聪</a>在<a href="http://www.zhihu.com/question/29504639" target="_blank" rel="external">怎么更好的理解虚拟DOM</a>中的回答</strong></p>
 </span>
-        
       
     </div>
 
@@ -250,168 +246,39 @@
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/21/react_tutorial1/" rel="next"></a>
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/21/react_tutorial1/" itemprop="url">
-                未命名
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-21T16:46:11+08:00" content="2015-09-21">
-            2015-09-21
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="React教程：使用react_js和flux框架创建一个简单的应用（一）">React教程：使用react js和flux框架创建一个简单的应用（一）</h1><p>我们前面已经讲过Virtual Dom的优势，这种优势在列表的展示方面特别显著，这次我们就用react做一个简单的todo应用来学习一下react的使用。</p>
-<h2 id="React_JS">React JS</h2><p>React可以使用JSX文件来写表现层，这意味着我们可以把JavaScript和HTML文件放在一个文件中。这是一个需要花一点时间去适应的过程，所以在这个教程中我们没有使用JSX来写，但是我们仍然推荐大家使用JSX，因为它可以更直观的看出哪个组件需要渲染。</p>
-<p>首先，我们需要创建一个react class来描述我们要渲染什么，接下来是一个简单的React class的例子。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> HelloWorld = React.createClass(&#123;</span><br><span class="line">    render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="title">div</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="title">div</span>&gt;</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">React.render(<span class="keyword">new</span> HelloWorld(), <span class="built_in">document</span>.body);</span><br></pre></td></tr></table></figure>
-<p>我们创建了一个HelloWorld的例子。在其中，我们使用了一个function：render。它会在当我们想渲染内部的html代码的时候被调用。在这个示例代码片段的最后一行，我们执行我们的class中包含html代码的render function，这也是jsx所扮演的角色。它让我们不再把html存放在分散的模板中而是直接在javascript中写html。代码片段的最后一行指明我们希望我们的HelloWorld class可以在document’s body中被渲染。</p>
-<h2 id="Props">Props</h2><p>那么当我们准备传一些数据到我们的React class中时应该怎么做呢？上面那个例子没有提到任何相关的机制，这里提供一个。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> HelloWorld = React.createClass(&#123;</span><br><span class="line">    render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &lt;div&gt;Hello, &#123;<span class="keyword">this</span>.props.name&#125;!&lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">React.render(<span class="keyword">new</span> HelloWorld(&#123; name: <span class="string">"Chris Harrington"</span> &#125;), document.body);</span><br></pre></td></tr></table></figure>
-<p>这里我们引入一个props参数在我们的React class中，用来指明传送什么数据到react的view层。props变量的任何变化都会触发一个在view层某个位置的重绘。这些变化可能来自这个view的自身或者是一个父view，也或是它拥有的任何子view。这个方法非常好用，因为它允许我们分发数据在多个view中并且让它们保持同步。在这个代码片段中，我传了我的名字到HelloWord class中，它会用这个props变量重绘div的内部。</p>
-<h2 id="State">State</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> HelloWorld = React.createClass(&#123;</span><br><span class="line">    getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            counter: <span class="number">0</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    increment: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123; counter: <span class="keyword">this</span>.state.counter+<span class="number">1</span> &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &lt;div&gt;</span><br><span class="line">            &lt;div&gt;&#123;<span class="keyword">this</span>.state.counter&#125;&lt;/div&gt;</span><br><span class="line">            &lt;button onClick=&#123;<span class="keyword">this</span>.increment&#125;&gt;Increment!&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">React.render(<span class="keyword">new</span> HelloWorld(), document.body);</span><br></pre></td></tr></table></figure>
-<p>这个代码片段引入了react class中另一个部份：state。一个react类的state属性允许我们跟踪view的内部变化。如同props，任何变化都会触发view中对应元素的重绘，附带上一个条件：我们必须调用一个setState的方法，正如例子中的increment function。 永远记得使用setState，否则，你的变化不会改变到你的view，这是使用react最重要的一件事。当使用内部状态时需要getInitialState function，它用来描述view初始的样子应该是什么样的。即使你的状态初始从完全没有开始的也确保包含这个方法，因为一个空的状态也是一个状态。</p>
-<p>那么什么时候使用props或者state或者只是用私有变量呢。Props是用来在父子classes中传递数据的，任何对一个prop的变化都会引发一个自动的view重绘，包括父view和子view。对于那些只关联到view的数据，使用state，state的任何变化也会重绘view。对于只与class有关系而不包括view的，你可以使用私有变量，但是我仍然推荐使用state；因为（追踪变化）正是它的真正目的。</p>
-<p>参考：<a href="https://www.codementor.io/reactjs/tutorial/react-js-flux-architecture-tutorial" target="_blank" rel="external">React Tutorial: Creating a Simple Application Using React JS and Flux Architecture</a>(<a href="https://www.codementor.io/reactjs/tutorial/react-js-flux-architecture-tutorial" target="_blank" rel="external">https://www.codementor.io/reactjs/tutorial/react-js-flux-architecture-tutorial</a>)</p>
-</span>
-        
+    <div class="post-spread">
       
     </div>
+  </div>
 
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/09/21/react_tutorial2/" itemprop="url">
-                未命名
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-09-21T16:46:11+08:00" content="2015-09-21">
-            2015-09-21
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h1 id="React教程：使用react_js和flux框架创建一个简单的应用（二）">React教程：使用react js和flux框架创建一个简单的应用（二）</h1><p>第一部分我们讲了react两个重要的参数props，state，现在我们接着往下讲</p>
-<h2 id="Nested_Views">Nested Views</h2><p>nesting views是另一个让react变得非常好用的概念。它让我们能够在其它的react classes中渲染一个react classes。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> FancyButton = React.createClass(&#123;</span><br><span class="line">    render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &lt;button onClick=&#123;<span class="keyword">this</span>.props.onClick&#125;&gt;</span><br><span class="line">            &lt;i className=&#123;<span class="string">"fa "</span> + <span class="keyword">this</span>.props.icon&#125;&gt;&lt;/i&gt;</span><br><span class="line">            &lt;span&gt;&#123;<span class="keyword">this</span>.props.text&#125;&lt;/span&gt;</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> HelloWorld = React.createClass(&#123;</span><br><span class="line">    getInitialState: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            counter: <span class="number">0</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    increment: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123; counter: <span class="keyword">this</span>.state.counter++ &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    render: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &lt;div&gt;</span><br><span class="line">            &lt;div&gt;&#123;<span class="keyword">this</span>.state.counter&#125;&lt;/div&gt;</span><br><span class="line">            &lt;FancyButton text=<span class="string">"Increment!"</span> icon=<span class="string">"fa-arrow-circle-o-up"</span> onClick=&#123;<span class="keyword">this</span>.increment&#125; /&gt;</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>我们将这个button增加counter的方法抽象到一个分离的react class，在其中，传递了一个icon class和一个点击时间。这说明了props可以通过nested classed部署。</p>
-<p>注意：因为”class”是一个严格的关键词在javascript中，在你的react class的html中写css 的class时使用”className”而非”class”。你可以在上面当我们给FancyButton设置css class的代码中看到。</p>
-<h2 id="User-build_View_Functions">User-build View Functions</h2><p>还有一些你在写react view时需要注意的functions。</p>
-<p>componentWillMount(挂载组件) － 当一个view需要被添加到父组件时这个function会被调用。它会在每次发生时被注册，所以它对于处理view的一些初始设置或者钩子一个事件处理是一个好的候选。</p>
-<p>componentWillMount(非挂载组件）－ 对应挂载组件。当这个view不再在一个父辈中被渲染时被注册。可以用来解钩一个事件处理。</p>
-<h2 id="Predefined_View_Functions">Predefined View Functions</h2><p>setState － 正如上面所诉，这个方法被调用当你设置你的react view的初始状态。如果你直接设定状态（例如：this.state.foo=“bar”),你的view是不会被渲染的，我们的第一条规则，永远记得使用setState，所以要这么写：this.setState({foo:”bar”})。</p>
-<p>forceUpdate － 这是一个强制重渲染view的一个方法。当你需要update一些不属于props或者state而在你的view中的变量时它是十分实用的。</p>
-<p>上面介绍了一些react js的基础方法，更多的function请参考：<a href="https://facebook.github.io/react/docs/component-api.html" target="_blank" rel="external">React JS documentation</a> 下面会介绍flux是如何工作，然后我们会开始制作一个todo application。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
  </div>
 
         
 
+        
+          <div class="comments" id="comments">
+            
+          </div>
         
       </div>
 
@@ -428,6 +295,15 @@
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
 
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
       
 
       <section class="site-overview">
@@ -475,6 +351,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React学习-Virtual_Dom"><span class="nav-number">1.</span> <span class="nav-text">React学习-Virtual Dom</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Virtual_Dom快的前提"><span class="nav-number">1.0.1.</span> <span class="nav-text">Virtual Dom快的前提</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于React"><span class="nav-number">1.0.2.</span> <span class="nav-text">关于React</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Virtual_Dom到底做了什么"><span class="nav-number">1.0.3.</span> <span class="nav-text">Virtual Dom到底做了什么</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
       
 
     </div>
@@ -544,6 +431,165 @@
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
 
   <script type="text/javascript">
     $(document).ready(function () {
