@@ -11,25 +11,19 @@
     <meta name="keywords" content="构建工具," />
   
 
-  <meta name="description" content="前端项目中自动生成雪碧图节省了我们很多的时间, 原来做这些工作比较依赖compass, 但是在webpack项目中如果只为了雪碧图引入compass有点太过笨重，这里总结几个使用webpack就能生成雪碧图的方法
-
-###postcss-sprites后处理
-postcss后处理是一个很强大的处理css的工具，跟sass这些预处理工具不同，postcss做为后处理工具，需要我们用loader处理">
+  <meta name="description" content="前端项目中自动生成雪碧图节省了我们很多的时间, 原来做这些工作比较依赖compass, 但是在webpack项目中如果只为了雪碧图引入compass有点太过笨重，这里总结几个使用webpack就能生成雪碧图的方法。
+Postcss Sprites后处理postcss后处理是一个很强大的处理css的工具，跟sass这些预处理工具不同，postcss做为后处理工具，需要我们用loader处理sass后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack自动雪碧图生成">
-<meta property="og:url" content="http://yoursite.com/2016/03/04/webpack_auto_sprites/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/03/16/webpack_auto_sprites/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前端项目中自动生成雪碧图节省了我们很多的时间, 原来做这些工作比较依赖compass, 但是在webpack项目中如果只为了雪碧图引入compass有点太过笨重，这里总结几个使用webpack就能生成雪碧图的方法
-
-###postcss-sprites后处理
-postcss后处理是一个很强大的处理css的工具，跟sass这些预处理工具不同，postcss做为后处理工具，需要我们用loader处理">
-<meta property="og:updated_time" content="2016-03-16T09:32:33.000Z">
+<meta property="og:description" content="前端项目中自动生成雪碧图节省了我们很多的时间, 原来做这些工作比较依赖compass, 但是在webpack项目中如果只为了雪碧图引入compass有点太过笨重，这里总结几个使用webpack就能生成雪碧图的方法。
+Postcss Sprites后处理postcss后处理是一个很强大的处理css的工具，跟sass这些预处理工具不同，postcss做为后处理工具，需要我们用loader处理sass后">
+<meta property="og:updated_time" content="2016-03-16T10:03:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack自动雪碧图生成">
-<meta name="twitter:description" content="前端项目中自动生成雪碧图节省了我们很多的时间, 原来做这些工作比较依赖compass, 但是在webpack项目中如果只为了雪碧图引入compass有点太过笨重，这里总结几个使用webpack就能生成雪碧图的方法
-
-###postcss-sprites后处理
-postcss后处理是一个很强大的处理css的工具，跟sass这些预处理工具不同，postcss做为后处理工具，需要我们用loader处理">
+<meta name="twitter:description" content="前端项目中自动生成雪碧图节省了我们很多的时间, 原来做这些工作比较依赖compass, 但是在webpack项目中如果只为了雪碧图引入compass有点太过笨重，这里总结几个使用webpack就能生成雪碧图的方法。
+Postcss Sprites后处理postcss后处理是一个很强大的处理css的工具，跟sass这些预处理工具不同，postcss做为后处理工具，需要我们用loader处理sass后">
 
   
 
@@ -124,6 +118,11 @@ postcss后处理是一个很强大的处理css的工具，跟sass这些预处理
 </div>
 
 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Postcss-Sprites后处理"><span class="toc-text">Postcss Sprites后处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpritesmithPlugin"><span class="toc-text">SpritesmithPlugin</span></a></li></ol>
+  </div>
+
 
 <a class="back-top" href="#">
   <i class="icon-angle-up"></i>
@@ -136,7 +135,7 @@ postcss后处理是一个很强大的处理css的工具，跟sass这些预处理
     <h1 class="post-title">webpack自动雪碧图生成</h1>
 
     <div class="article-meta">
-      <span>2016-03-04</span>
+      <span>2016-03-16</span>
 
       <span> | </span>
 
@@ -155,11 +154,8 @@ postcss后处理是一个很强大的处理css的工具，跟sass这些预处理
 
   <div class="article-content">
     
-      <blockquote>
-<p>前端项目中自动生成雪碧图节省了我们很多的时间, 原来做这些工作比较依赖compass, 但是在webpack项目中如果只为了雪碧图引入compass有点太过笨重，这里总结几个使用webpack就能生成雪碧图的方法</p>
-</blockquote>
-<p>###postcss-sprites后处理</p>
-<p>postcss后处理是一个很强大的处理css的工具，跟sass这些预处理工具不同，postcss做为后处理工具，需要我们用loader处理sass后再处理，在postcss里我们做很多事，比如autoprefix，preces，合并图片甚至是一些兼容调整或者px转换em都以支持，像vue-loader等这样的框架文件loader都已经内置了postcss，只要简单的配置就可以使用。</p>
+      <p><strong>前端项目中自动生成雪碧图节省了我们很多的时间, 原来做这些工作比较依赖compass, 但是在webpack项目中如果只为了雪碧图引入compass有点太过笨重，这里总结几个使用webpack就能生成雪碧图的方法。</strong></p>
+<h3 id="Postcss-Sprites后处理"><a href="#Postcss-Sprites后处理" class="headerlink" title="Postcss Sprites后处理"></a>Postcss Sprites后处理</h3><p>postcss后处理是一个很强大的处理css的工具，跟sass这些预处理工具不同，postcss做为后处理工具，需要我们用loader处理sass后再处理，在postcss里我们做很多事，比如autoprefix，preces，合并图片甚至是一些兼容调整或者px转换em都以支持，像vue-loader等这样的框架文件loader都已经内置了postcss，只要简单的配置就可以使用。</p>
 <p>这里我们用autoprefixer简单介绍一下postcss的用法：</p>
 <p>install: <code>npm install postcss-loader --save-dev</code></p>
 <p>usage:</p>
@@ -172,8 +168,7 @@ postcss后处理是一个很强大的处理css的工具，跟sass这些预处理
 <p>我们在sass或者别的style file中使用起来也很简单，只要这样</p>
 <p><code>background: url(images/sp/red-sun@2x.png) no-repeat 0 0</code></p>
 <p>基本跟我们设置普通背景图没有区别，具体的一些options可以参考<a href="https://github.com/2createStudio/postcss-sprites" target="_blank" rel="external">postcss-sprites</a></p>
-<p>###SpritesmithPlugin</p>
-<p>当然也有很多人不喜欢后处理的方式(比如我)，我们的webpack其实也可以通过plugin来处理这些图片，特别是我们还可以获得单个图片的高宽，在一些我们需要让图片居中的场景特别合适，废话不多说，直接看栗子！</p>
+<h3 id="SpritesmithPlugin"><a href="#SpritesmithPlugin" class="headerlink" title="SpritesmithPlugin"></a>SpritesmithPlugin</h3><p>当然也有很多人不喜欢后处理的方式(比如我)，我们的webpack其实也可以通过plugin来处理这些图片，特别是我们还可以获得单个图片的高宽，在一些我们需要让图片居中的场景特别合适，废话不多说，直接看栗子！</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> SpritesmithPlugin = <span class="built_in">require</span>(<span class="string">'webpack-spritesmith'</span>);</span><br><span class="line">plugins: [</span><br><span class="line">    <span class="keyword">new</span> SpritesmithPlugin(&#123;</span><br><span class="line">      src: &#123;</span><br><span class="line">        cwd: <span class="string">'./src/assets/sp/'</span>,</span><br><span class="line">        glob: <span class="string">'*.png'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      target: &#123;</span><br><span class="line">        image: <span class="string">'./src/assets/gen/sprite.png'</span>,</span><br><span class="line">        css: <span class="string">'./src/style/mixins/_sprite.scss'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      apiOptions: &#123;</span><br><span class="line">        cssImageRef: <span class="string">'../assets/gen/sprite.png'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      spritesmithOptions: &#123;</span><br><span class="line">        algorithm: <span class="string">'top-down'</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>在这个例子里面，我们设置了src的目录，并且只选择png文件。然后我们的target有两个，一个是生成的雪碧图地址，另外一个是生成用来引用文件(这个我们等会解释)，api地址可以写一个src中入口css文件引用的相对地址用来定位，options提供了丰富的配置，这里的top-down就可以生成从上排到下一列的雪碧图用来处理一些需要repeat的情况。</p>
 <p>那么我们怎么引用生成的雪碧图呢，我们可以看下target里的css对应的文件:</p>
@@ -201,7 +196,7 @@ postcss后处理是一个很强大的处理css的工具，跟sass这些预处理
   <script>
     var disqus_shortname = 'forsigner';
     
-    var disqus_url = 'http://yoursite.com/2016/03/04/webpack_auto_sprites/';
+    var disqus_url = 'http://yoursite.com/2016/03/16/webpack_auto_sprites/';
     
     (function(){
       var dsq = document.createElement('script');
