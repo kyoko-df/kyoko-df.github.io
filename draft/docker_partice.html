@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Kyonko,前端,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="Docker实战docker常用命令 获取镜像  1sudo docker pull NAME[:TAG]  启动container盒子 1sudo docker run [OPTIONS] IMAGE [COMMAND] [ARG...]  查看镜像列表，列出本地的所有images 1sudo docker images [OPTIONS] [NAME]  查看容器列表（可看到我们创建过的所有C">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/draft/docker_partice.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Docker实战docker常用命令 获取镜像  1sudo docker pull NAME[:TAG]  启动container盒子 1sudo docker run [OPTIONS] IMAGE [COMMAND] [ARG...]  查看镜像列表，列出本地的所有images 1sudo docker images [OPTIONS] [NAME]  查看容器列表（可看到我们创建过的所有C">
+<meta property="og:updated_time" content="2016-10-28T13:38:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="Docker实战docker常用命令 获取镜像  1sudo docker pull NAME[:TAG]  启动container盒子 1sudo docker run [OPTIONS] IMAGE [COMMAND] [ARG...]  查看镜像列表，列出本地的所有images 1sudo docker images [OPTIONS] [NAME]  查看容器列表（可看到我们创建过的所有C">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link rel="stylesheet" href="/css/styles.css">
+
+  
+
+  
+
+  
+
+</head>
+
+<body>
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/category/"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/link/"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/atom.xml"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker实战"><span class="toc-text">Docker实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#docker常用命令"><span class="toc-text">docker常用命令</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+<a class="back-top" href="#">
+  <i class="icon-angle-up"></i>
+</a>
+
+
+<div class="content-post CENTER">
+   <article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">(no title)</h1>
+
+    <div class="article-meta">
+      <span>2017-01-03</span>
+
+      <span> | </span>
+
+      <span class="article-author">kyoko-df</span>
+
+      <span> | </span>
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="Docker实战"><a href="#Docker实战" class="headerlink" title="Docker实战"></a>Docker实战</h1><h3 id="docker常用命令"><a href="#docker常用命令" class="headerlink" title="docker常用命令"></a>docker常用命令</h3><ol>
+<li><p>获取镜像 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker pull NAME[:TAG]</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动container盒子</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看镜像列表，列出本地的所有images</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker images [OPTIONS] [NAME]</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看容器列表（可看到我们创建过的所有Container）</p>
+</li>
+</ol>
+   <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker ps [OPTIONS]</div></pre></td></tr></table></figure>
+<ol>
+<li>​</li>
+</ol>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+  
+      <div class="fexo-comments comments-page">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/draft/docker_partice.html';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+</body>
+</html>
