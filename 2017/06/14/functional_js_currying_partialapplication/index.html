@@ -18,12 +18,12 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/14/functional_js_currying_partialapplication/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="函数式编程概念之Currying和Partial application假设有一个函数 123function add(x, y, z) &amp;#123;  return x + y + z;&amp;#125; Curring123456789function curry(fn) &amp;#123;      return function curried(...args) &amp;#123;        retur">
-<meta property="og:image" content="http://yoursite.com/images/curry-function-closures.jpg">
-<meta property="og:updated_time" content="2017-06-14T06:51:58.000Z">
+<meta property="og:image" content="http://yoursite.com/images/curry-function-closures.png">
+<meta property="og:updated_time" content="2017-06-14T08:02:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数式编程概念之Currying和Partial application">
 <meta name="twitter:description" content="函数式编程概念之Currying和Partial application假设有一个函数 123function add(x, y, z) &amp;#123;  return x + y + z;&amp;#125; Curring123456789function curry(fn) &amp;#123;      return function curried(...args) &amp;#123;        retur">
-<meta name="twitter:image" content="http://yoursite.com/images/curry-function-closures.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/curry-function-closures.png">
 
   
 
@@ -165,7 +165,7 @@
 <p>说明参数不够时返回的是一个函数，这个函数等待接受后面的函数，最终当参数数量足够时执行函数:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curryAdd(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>);			<span class="comment">// 6</span></div></pre></td></tr></table></figure>
 <p>看一张图：</p>
-<p><img src="/images/curry-function-closures.jpg" alt="currying"></p>
+<p><img src="/images/curry-function-closures.png" alt="currying"></p>
 <p>Partial Application</p>
 <p><strong>Partial application</strong> means taking a function and <em>paritally</em> applying it to one or more of its arguments, but not all, creating a new function in the process.</p>
 <p>偏函数应用意思是使用一个或多个参数来部份化应用一个函数，而非全部，在这个过程会生成新的函数。</p>
