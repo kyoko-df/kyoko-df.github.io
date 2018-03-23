@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Kyonko,前端,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="Service-Worker缓存策略分析 本文主要分析通过workbox生成Service-Worker的缓存策略，分析的源码来之workbox，workbox是GoogleChrome团队对原来sw-precache和sw-router的封装，并且提供了Webpack和Gulp插件方便开发者快速生成sw.js文件。  precache 和 runtimecache首先看一下 workbox 提供">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/draft/sw_cache_analyze.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Service-Worker缓存策略分析 本文主要分析通过workbox生成Service-Worker的缓存策略，分析的源码来之workbox，workbox是GoogleChrome团队对原来sw-precache和sw-router的封装，并且提供了Webpack和Gulp插件方便开发者快速生成sw.js文件。  precache 和 runtimecache首先看一下 workbox 提供">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-06-21T10:11:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="Service-Worker缓存策略分析 本文主要分析通过workbox生成Service-Worker的缓存策略，分析的源码来之workbox，workbox是GoogleChrome团队对原来sw-precache和sw-router的封装，并且提供了Webpack和Gulp插件方便开发者快速生成sw.js文件。  precache 和 runtimecache首先看一下 workbox 提供">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link rel="stylesheet" href="/css/styles.css">
+
+  
+
+  
+
+  
+
+</head>
+
+<body>
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/archives/"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/category/"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/tag/"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/link/"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/about/"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a 
+            class="CIRCLE" 
+            href="/atom.xml"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Service-Worker缓存策略分析"><span class="toc-text">Service-Worker缓存策略分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#precache-和-runtimecache"><span class="toc-text">precache 和 runtimecache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义缓存配置"><span class="toc-text">自定义缓存配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何配置我的缓存"><span class="toc-text">如何配置我的缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li></ol>
+  </div>
+
+
+<a class="back-top" href="#">
+  <i class="icon-angle-up"></i>
+</a>
+
+
+<div class="content-post CENTER">
+   <article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">(no title)</h1>
+
+    <div class="article-meta">
+      <span>2017-06-21</span>
+
+      <span> | </span>
+
+      <span class="article-author">kyoko-df</span>
+
+      <span> | </span>
+
+      
+
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="Service-Worker缓存策略分析"><a href="#Service-Worker缓存策略分析" class="headerlink" title="Service-Worker缓存策略分析"></a>Service-Worker缓存策略分析</h2><blockquote>
+<p>本文主要分析通过workbox生成Service-Worker的缓存策略，分析的源码来之workbox，workbox是GoogleChrome团队对原来sw-precache和sw-router的封装，并且提供了Webpack和Gulp插件方便开发者快速生成sw.js文件。</p>
+</blockquote>
+<h3 id="precache-和-runtimecache"><a href="#precache-和-runtimecache" class="headerlink" title="precache 和 runtimecache"></a>precache 和 runtimecache</h3><p>首先看一下 workbox 提供的 Webpack 插件 workboxPlugin 的三个参数：</p>
+<ul>
+<li>globDirectory</li>
+<li>staticFileGlobs</li>
+<li>swDest</li>
+</ul>
+<p>其中 globDirectory 和 staticFileGlobs 就会决定需要缓存的静态文件，这两个参数也存在默认值，插件会从compilation参数中获取开发者在 Webpack 配置的 output.path 作为 globDirectory 的默认值，staticFileGlobs 的默认配置是 html，js，css 文件，如果需要缓存一些界面必须的图片，这个地方需要自己配置。</p>
+<p>之后 Webpack 插件会将配置作为参数传递给 workbox-build 模块，workbox-build 模块中会根据 globDirectory 和 staticFileGlobs 读取文件生成一份配置信息，交给 precache 处理。需要注意的是，precache里不要存太多的文件，workbox-build 对文件会有一个过滤， 该模块会读取利用 node 的 fs 模块读取文件，如果文件大于2M则不会加入配置中（可以通过配置 maximumFileSize 修改），同时会根据文件的 buffer 生成一个 hash 值，也就是说就算开发者不改变文件名，只要文件内容修改了，也会生成一个新的配置内容，让浏览器更新缓存。</p>
+<p>那么说了那么多，precache 到底是个什么玩意呢，看一下生成的sw文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fileManifest = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">'url'</span>: <span class="string">'main.js'</span>,</span><br><span class="line">    <span class="string">'revision'</span>: <span class="string">'0e438282dc400829497725a6931f66e3'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">'url'</span>: <span class="string">'main.css'</span>,</span><br><span class="line">    <span class="string">'revision'</span>: <span class="string">'02ba19bb320adb687e08dded3e71408d'</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> workboxSW = <span class="keyword">new</span> self.WorkboxSW();</span><br><span class="line">workboxSW.precache(fileManifest);</span><br></pre></td></tr></table></figure>
+<p>那还是需要看一下 precache 的代码:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">precache(revisionedFiles) &#123;</span><br><span class="line">  <span class="keyword">this</span>._revisionedCacheManager.addToCacheList(&#123;</span><br><span class="line">    revisionedFiles,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 是的，workbox会提供一个对象revisionedCacheManager来管理所有的缓存，先不管里面具体怎么处理的，往下看有个 registerInstallActivateEvents。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">_registerInstallActivateEvents(skipWating, clientsClaim) &#123;</span><br><span class="line">  self.addEventListener(<span class="string">'install'</span>, (event) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> cachedUrls = <span class="keyword">this</span>._revisionedCacheManager.getCachedUrls();</span><br><span class="line">  &#125;)</span><br><span class="line">  event.waitUntil(</span><br><span class="line">  	<span class="keyword">this</span>._revisionedCacheManager.install().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (skipWaiting) &#123;</span><br><span class="line">        <span class="keyword">return</span> self.skipWaiting();</span><br><span class="line">      &#125;</span><br><span class="line">  	&#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里可以看出，所有的 precache 都会在 service worker 的 install 事件中完成。event.waitUntil会根据内部promise的结果来确定安装是否完成。如果安装失败，则会舍弃这个ServiceWorker。</p>
+<p>现在看一下_revisionedCacheManager.install 里干了什么，首先 revisionedFiles 会被放在一个 Map 中，当然这个 revisionedFiles 是已经被处理过了， 在经过 addToCacheList -&gt; _addEntries -&gt; _parseEntry 的过程后，灰返回：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  entryID,</span><br><span class="line">  revision,</span><br><span class="line">  request: <span class="keyword">new</span> Request(url),</span><br><span class="line">  cacheBust</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>entryID 会某些情况下做一些，不主动传入可以视为用户传入的url，将用来作为IndexDB中的key存储revision，而request则用来提供给之后的fetch请求，cacheBust默认为true，功能等会再分析。</p>
+<p>Map 的set 过程在 _addEntries 的 _addEntryToInstallList 函数中，这里只需注意因为 fileManifest 中不能存放具有相同 url （或者说entryID）的值，不然会被警告。</p>
+<p>现在回来看install，install是一个async函数，返回一个Promise结果，符合waitUntil的要求。每一个需要缓存的文件会到 cacheEntry 函数中处理，对于每一个请求会去通过 _isAlreadyCached 方法访问indexDB 得知是否被缓存过。这里可能有读者会疑惑，我们不是不能在 fileManifest 中不允许存储同样的url，为什么还要查是否缓存过，这是因为当你sw文件更新后，</p>
+<h3 id="自定义缓存配置"><a href="#自定义缓存配置" class="headerlink" title="自定义缓存配置"></a>自定义缓存配置</h3><h3 id="如何配置我的缓存"><a href="#如何配置我的缓存" class="headerlink" title="如何配置我的缓存"></a>如何配置我的缓存</h3><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在目前的网络环境下，service worker 的推送服务并不能得到很好的利用，所以使用 service worker 很大程度就是利用其强大的缓存能力给用户在弱网和无网环境的优化，甚至可以通过判断网络环境进行一些预下载，丰富页面的交互。但是一个错误的缓存策略可能会使用户得不到最新的内容，每一个致力于使用 service worker 或者 PWA 的开发者都需要了解其缓存的处理。Google 提供了一系列的工具能够快速生成优质的sw文件，但是配套文档过分简单和无本地化让这些配置如同一个黑盒，使开发者很难确定正确的配置方案。希望能够阅读本文，解决读者这方面的困惑。</p>
+<p><strong>想要摆脱workbox只了解service worker的离线缓存可以阅读官方的<a href="https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/" target="_blank" rel="noopener">离线指南</a>。</strong></p>
+
+    
+  </div>
+</article>
+
+</div>
+
+
+  
+      <div class="fexo-comments comments-page">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/draft/sw_cache_analyze.html';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+</body>
+</html>
